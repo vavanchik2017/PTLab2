@@ -1,18 +1,18 @@
 - model: shop.product
   pk: 1
   fields:
-    name: Стол
+    name: Пестициды
     price: 2000
     amount: 50
 - model: shop.product
   pk: 2
   fields:
-    name: Стул
+    name: Табачная пыль
     price: 1000
     amount: 20
 - model: shop.product
   pk: 3
   fields:
-    name: Табурет
+    name: Семена помидора "Черри"
     price: 500
     amount: 40
