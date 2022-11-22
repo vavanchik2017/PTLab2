@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
     <title>Товары</title>
 </head>
 <body>
@@ -11,12 +12,14 @@
             <tr>
                 <td><p>Наименование</p></td>
                 <td><p>Цена</p></td>
+                <td><p>Осталось</p></td>
                 <td></td>
             </tr>
             {% for p in products %}
                 <tr>
                     <td><p>{{ p.name }}</p></td>
                     <td><p>{{ p.price }}</p></td>
+                    <td><p>{{ p.amount }}</p></td>
                     <td><p><a href="/buy/{{ p.id }}">Купить</a></p></td>
                 </tr>
             {% endfor %}
