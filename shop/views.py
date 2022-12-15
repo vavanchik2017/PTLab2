@@ -20,16 +20,16 @@ class PurchaseCreate(CreateView):
     def update_price(self):
         getprod = Product.objects.get(id=self.object.product.id)
         if getprod.amount <= getprod.ordered_amount and getprod.flag == 0:
-            Product.objects.filter(id=self.object.product.id).update(price=self.object.product.price*1.12,flag=1)
+            Product.objects.filter(id=self.object.product.id).update(price=self.object.product.price*1.2,flag=1)
     def form_valid(self, form):
         self.object = form.save()
         prods = Product.objects.get(id=self.object.product.id)
         if (prods.amount - int(self.object.amount_order)) < 0:
             return HttpResponse(f'Ошибка: отсутствует нужное количество!')
         else:
-            Product.objects.filter(id=self.object.product.id).update(ordered_amount=prods.ordered_amount + \
-                    self.object.amount_order)
-            Product.objects.filter(id=self.object.product.id).update(amount=prods.amount - self.object.amount_order)
+            prods.ordered_amount = prods.ordered_amount+self.object.amount_order
+            prods.amount = prods.amount-self.object.amount_order
+            prods.save()
             PurchaseCreate.update_price(self)
             return HttpResponse(f'Спасибо за покупку! <a href="/">Главная</a>')
 
