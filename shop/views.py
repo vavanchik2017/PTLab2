@@ -20,7 +20,9 @@ class PurchaseCreate(CreateView):
     def update_price(self):
         getprod = Product.objects.get(id=self.object.product.id)
         if getprod.amount <= getprod.ordered_amount and getprod.flag == 0:
-            Product.objects.filter(id=self.object.product.id).update(price=self.object.product.price*1.2,flag=1)
+            getprod.price = getprod.price*1.2
+            getprod.flag = 1
+            getprod.save()
     def form_valid(self, form):
         self.object = form.save()
         prods = Product.objects.get(id=self.object.product.id)
